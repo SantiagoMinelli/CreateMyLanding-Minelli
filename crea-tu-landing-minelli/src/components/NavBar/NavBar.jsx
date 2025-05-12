@@ -1,13 +1,13 @@
-import "./NavBar.css"
-//import logo from "../../assets"
-import CartWidget from "../CartWidget/CartWidget"
+import "./NavBar.css";
+import logo from "../../assets/logo-buenas-cosas.png";
+import CartWidget from "../CartWidget/CartWidget";
 
 function NavBar() {
 
     return (
         <nav className="navbar">
             <div>
-                <img src="" alt="Logo Buenas Cosas" />
+                <img className="logo" src={logo} alt="Logo Buenas Cosas"/>
             </div>
             <ul className="navbar-links">
                 <li className="navbar-item">
