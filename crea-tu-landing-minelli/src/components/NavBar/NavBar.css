@@ -11,8 +11,8 @@ body {
 
 .navbar {
     display: flex;
-    height: 120px;
-    background-color: bisque;
+    height: 100px;
+    background-color: #FFE0B2;
     justify-content: space-around;
     align-items:center;
 }
@@ -23,33 +23,42 @@ body {
 }
 
 .navbar-item {
-    margin-right: 1rem;
-}
-
-.navbar a:hover {
-    color: blueviolet;
+    margin: 0.8rem;
 }
 
 .navbar a {
-    color: black;
+    color: #333333;
     text-decoration: none;
+    transition: all 0.5s ease;
+    font-size: 18px;
+    font-weight: bolder;
+}
+.navbar a:hover {
+    color: white;
+    background-color: #28c9c2;
+    padding: 5px;
+    border-color: rgb(255, 255, 255);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    transform: translateY(-3px);
 }
 
 .logo {
-    width: 130px;
+    width: 108px;
 }
 
 .carrito {
     position: relative;
+    cursor: pointer;
 }
 
 .badge {
     position: absolute;
     top: 0;
     right: 0;
-    background-color: #ee7787; /* Color de fondo */
+    background-color: #A6DDD9; /* Color de fondo */
     color: white; /* Color del texto */
-    font-size: 12px;
+    font-size: 15px;
     padding: 2px 6px;
     border-radius: 50%; /* Forma redondeada */
     transform: translate(50%, -50%);
