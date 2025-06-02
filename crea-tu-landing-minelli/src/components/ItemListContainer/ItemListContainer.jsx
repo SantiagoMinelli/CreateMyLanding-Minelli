@@ -1,6 +1,25 @@
+import { useEffect, useState } from "react";
+import ItemList from "./ItemList";
+
+import {prodcutosBuenasCosas} from "../../data/productos";
 import "./ItemListContainer.css";
 
 function ItemListContainer({message}) {
+
+    const [items,setItems] = useState([]);
+
+    useEffect(() => {
+        const fetchProductos = new Promise((resolve) => {
+            setTimeout(() => {
+                resolve(prodcutosBuenasCosas)
+            },2000)
+        })
+    
+        fetchProductos.then((data) => {
+            setItems(data)
+        })
+    },[])
+
     return (
         <div>
             <div className="encabezado">
@@ -8,37 +27,8 @@ function ItemListContainer({message}) {
             </div>
             <div className="container">
                 <div className="row">
-                    <div className="col-3">
-                        <div className="card">
-                            <img className="imagen-card" alt="TST Imagen" src="/logo-buenas-cosas.png"/>
-                            <h2>TST Pastelería 1</h2>
-                            <p>$$$$$$</p>
-                            <button>Añadir</button>
-                        </div>                       
-                    </div>
-                    <div className="col-3">
-                        <div className="card">
-                            <img className="imagen-card" alt="TST Imagen" src="/logo-buenas-cosas.png"/>
-                            <h2>TST Pastelería 2</h2>
-                            <p>$$$$$$</p>
-                            <button>Añadir</button>
-                        </div>   
-                    </div>
-                    <div className="col-3">
-                        <div className="card">
-                            <img className="imagen-card" alt="TST Imagen" src="/logo-buenas-cosas.png"/>
-                            <h2>TST Pastelería 3</h2>
-                            <p>$$$$$$</p>
-                            <button>Añadir</button>
-                        </div>   
-                    </div>
-                    <div className="col-3">
-                        <div className="card">
-                            <img className="imagen-card" alt="TST Imagen" src="/logo-buenas-cosas.png"/>
-                            <h2>TST Pastelería 4</h2>
-                            <p>$$$$$$</p>
-                            <button>Añadir</button>
-                        </div>   
+                    <div className="col">
+                        <ItemList items={items}/>
                     </div>
                 </div>
             </div>
