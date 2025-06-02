@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ItemList from "./ItemList";
 
-import {prodcutosBuenasCosas} from "../../data/productos";
+import productosBuenasCosas from '../../data/productos.js';
 import "./ItemListContainer.css";
 
 function ItemListContainer({message}) {
@@ -11,7 +11,7 @@ function ItemListContainer({message}) {
     useEffect(() => {
         const fetchProductos = new Promise((resolve) => {
             setTimeout(() => {
-                resolve(prodcutosBuenasCosas)
+                resolve(productosBuenasCosas)
             },2000)
         })
     
