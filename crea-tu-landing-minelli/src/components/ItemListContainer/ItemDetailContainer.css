@@ -1,0 +1,130 @@
+.container-detail {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+    font-family: "Montserrat", sans-serif;
+}
+
+.card-detail {
+    display: flex;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-width: 1000px;
+    width: 100%;
+    gap: 2rem;
+    padding: 2rem;
+    flex-wrap: wrap;
+}
+
+.detail-image {
+    flex: 1 1 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.imagen-card-detail {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    object-fit: contain;
+}
+
+.detail-info {
+    flex: 1 1 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.title-prod {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.price-prod {
+    font-size: 24px;
+    color: #34a853;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.tags {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.tag {
+    background-color: #e0e0e0;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 1rem 0;
+}
+
+.description-prod {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem 0;
+    color: #333;
+    font-size: 16px;
+}
+
+.description-prod li {
+    margin-bottom: 6px;
+}
+
+.item-count {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.btn-menos,
+.btn-mas {
+    background-color: #28c9c2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-menos:hover,
+.btn-mas:hover {
+    background-color: #14817b;
+}
+
+.cantidad {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.btn-añadir {
+    background-color: #5c8d65;
+    color: white;
+    padding: 1rem;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease;
+}
+
+.btn-añadir:hover {
+    background-color: #426947;
+}

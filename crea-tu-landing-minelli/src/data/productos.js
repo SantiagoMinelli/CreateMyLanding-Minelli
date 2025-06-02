@@ -4,7 +4,7 @@ const productosBuenasCosas = [
         nombre: "s",
         descripcion: "s",
         precio: 12.99,
-        imagen: "/buenas-cosas/public/logo.png",
+        imagen: "../../public/logo-buenas-cosas.png",
         categoria: "Pasteleria"
     },
     {
@@ -12,7 +12,7 @@ const productosBuenasCosas = [
         nombre: "a",
         descripcion: "asa",
         precio: 12.50,
-        imagen: "/buenas-cosas/public/logo.png",
+        imagen: "../../public/logo-buenas-cosas.png",
         categoria: "Panificacion"
     },
         {
@@ -20,7 +20,7 @@ const productosBuenasCosas = [
         nombre: "n",
         descripcion: "annnsa",
         precio: 18.50,
-        imagen: "/buenas-cosas/public/logo.png",
+        imagen: "../../public/logo-buenas-cosas.png",
         categoria: "Pasteleria"
     }
 ];

@@ -1,40 +1,28 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import NavBar from './components/NavBar/NavBar';
+import NavBar from "./components/NavBar/NavBar";
+import Home from './components/Pages/Home';
+import Error from './components/Pages/Error';
+import ItemList from './components/ItemListContainer/ItemList';
 import ItemListContainer from './components/ItemListContainer/ItemListContainer';
-// import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer';
-import './App.css';
+import ItemDetailContainer from './components/ItemListContainer/ItemDetailContainer';
 
-// Componentes temporales (los reemplazaremos después)
-const Home = () => <div>Página de Inicio</div>;
-const Nosotros = () => <div>Página Nosotros</div>;
-const Error = () => <div>Página no encontrada - Error 404</div>;
+import './App.css';
 
 function App() {
 
   return (
     <>
-    <BrowserRouter>
-      <NavBar/>
-      <Routes>
-            {/* Ruta principal */}
-            <Route path="/" element={<Home />} />
-            
-            {/* Ruta para todos los productos */}
-            <Route path="/productos" element={<ItemListContainer />} />
-            
-            {/* Ruta para productos por categoría */}
-            <Route path="/category/:categoryId" element={<ItemListContainer />} />
-            
-            {/* Ruta para detalle de producto */}
-            {/*<Route path="/productos/:id" element={<ItemDetailContainer />} />*/}
-            
-            {/* Ruta Nosotros */}
-            <Route path="/nosotros" element={<Nosotros />} />
-            
-            {/* Ruta 404 - debe ir al final */}
-            <Route path="*" element={<Error />} />
-      </Routes>
-    </BrowserRouter>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<NavBar/>}>
+              <Route index element={<Home/>}/>
+              <Route path="/ItemListContainer" element={<ItemListContainer/>}/>
+              <Route path="/Item/:itemId" element={<ItemDetailContainer/>}/>
+              <Route path="/categoria/:categoriaId" element={<ItemList/>}/>
+              <Route path="/*" element={<Error/>}/>
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }

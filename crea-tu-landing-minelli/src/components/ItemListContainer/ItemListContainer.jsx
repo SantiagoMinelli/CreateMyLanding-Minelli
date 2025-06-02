@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import ItemList from "./ItemList";
+import Item from "./Item";
 
 import productosBuenasCosas from '../../data/productos.js';
 import "./ItemListContainer.css";
 
-function ItemListContainer({message}) {
+function ItemListContainer() {
 
     const [items,setItems] = useState([]);
 
@@ -12,7 +12,7 @@ function ItemListContainer({message}) {
         const fetchProductos = new Promise((resolve) => {
             setTimeout(() => {
                 resolve(productosBuenasCosas)
-            },2000)
+            },1000)
         })
     
         fetchProductos.then((data) => {
@@ -22,14 +22,11 @@ function ItemListContainer({message}) {
 
     return (
         <div>
-            <div className="encabezado">
-                <h1>{message}</h1>
-            </div>
             <div className="container">
                 <div className="row">
-                    <div className="col">
-                        <ItemList items={items}/>
-                    </div>
+                    {productosBuenasCosas.map(prod=>(
+                        <Item key={prod.id} {...prod}/>
+                    ))}
                 </div>
             </div>
         </div>

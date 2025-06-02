@@ -1,0 +1,23 @@
+.main{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem;
+    font-family: "Montserrat, sans-serif";
+}
+
+.link{
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 10px 20px;
+    color: black;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.link:hover{
+    color: #28c9c2;
+}
