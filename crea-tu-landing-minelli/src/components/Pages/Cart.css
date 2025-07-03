@@ -135,6 +135,18 @@
     color: var(--white);
 }
 
+.boton-cantidad.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    border-color: #ccc;
+    color: #ccc;
+}
+
+.boton-cantidad.disabled:hover {
+    background-color: transparent;
+    color: #ccc;
+}
+
 /* Botones */
 .remove-btn {
     padding: 0.6rem 1.2rem;

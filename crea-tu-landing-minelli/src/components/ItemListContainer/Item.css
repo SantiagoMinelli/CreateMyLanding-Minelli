@@ -69,3 +69,42 @@
     font-weight: bold;
     z-index: 1;
 }
+
+/* Estilos para los botones de cantidad */
+.controles-cantidad {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.boton-cantidad {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid #d35400;
+    background: transparent;
+    color: #d35400;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.boton-cantidad:hover:not(.disabled) {
+    background: #d35400;
+    color: white;
+}
+
+.boton-cantidad.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    border-color: #ccc;
+    color: #ccc;
+}
+
+.boton-cantidad.disabled:hover {
+    background: transparent;
+}

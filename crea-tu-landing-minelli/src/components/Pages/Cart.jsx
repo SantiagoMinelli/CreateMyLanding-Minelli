@@ -79,9 +79,9 @@ const Cart = () => {
     };
 
     const disminuirCantidad = (producto) => {
-        producto.cantidad > 1 
-            ? agregarAlCarrito({ ...producto, cantidad: -1 }) 
-            : removerDelCarrito(producto.id);
+        if (producto.cantidad > 1) {
+            agregarAlCarrito({ ...producto, cantidad: -1 });
+        }
     };
 
     return (
@@ -157,9 +157,13 @@ const Cart = () => {
                                     <h3>{item.nombre}</h3>
                                     <p>Precio unitario: ${item.precio.toFixed(2)}</p>
                                     <div className="quantity-controls">
-                                        <button onClick={() => disminuirCantidad(item)}>-</button>
+                                        <button onClick={() => disminuirCantidad(item)} disabled={item.cantidad <= 1} className={`boton-cantidad ${item.cantidad <= 1 ? 'disabled' : ''}`}>
+                                            -
+                                        </button>
                                         <span>{item.cantidad}</span>
-                                        <button onClick={() => aumentarCantidad(item)}>+</button>
+                                        <button onClick={() => aumentarCantidad(item)} className="boton-cantidad">
+                                            +
+                                        </button>
                                     </div>
                                     <p>Subtotal: ${(item.precio * item.cantidad).toFixed(2)}</p>
                                     <button 
