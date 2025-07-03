@@ -32,7 +32,7 @@ function ItemListContainer() {
 
   return (
     <div className="productos-container">
-      <h2>Todos nuestros productos</h2>
+      <h2 className="titulo-seccion">Todos nuestros productos</h2>
       <div className="productos-grid">
         {productos.map((producto) => (
           <Item 

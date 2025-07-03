@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../../firebase";
 import Item from "./Item";
-//import "./ItemList.css";
+import "./ItemList.css";
 
 function ItemList() {
   const { categoriaId } = useParams();
@@ -35,7 +35,7 @@ function ItemList() {
 
   return (
     <div className="productos-container">
-      <h2>Productos de {categoriaId}</h2>
+      <h2 className="titulo-seccion">Productos de {categoriaId}</h2>
       <div className="productos-grid">
         {productos.length > 0 ? (
           productos.map((producto) => (
@@ -43,6 +43,7 @@ function ItemList() {
               key={producto.id}
               id={producto.id}
               nombre={producto.nombre}
+              descripcion={producto.descripcion}
               precio={producto.precio}
               imagen={producto.imagen}
               categoria={producto.categoria}

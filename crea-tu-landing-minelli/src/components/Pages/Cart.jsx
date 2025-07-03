@@ -19,6 +19,14 @@ const Cart = () => {
         apellido: "",
         celular: ""
     });
+    const [errors, setErrors] = useState({
+        celular: ""
+    });
+
+    const validatePhone = (phone) => {
+        const phoneRegex = /^[0-9]{8,15}$/;
+        return phoneRegex.test(phone);
+    };
 
     const calcularTotal = () => {
         return cartItems.reduce((total, item) => total + (item.precio * item.cantidad), 0);
@@ -26,155 +34,137 @@ const Cart = () => {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setDatosCliente({
-            ...datosCliente,
+        
+        if (name === "celular") {
+            setErrors(prev => ({
+                ...prev,
+                celular: value && !validatePhone(value) 
+                    ? "Número inválido (debe contener entre 8-15 dígitos)" 
+                    : ""
+            }));
+        }
+        
+        setDatosCliente(prev => ({
+            ...prev,
             [name]: value
-        });
+        }));
     };
 
     const handleFinalizarCompra = () => {
         setMostrarFormulario(true);
+        setErrors({ celular: "" });
     };
 
     const handleEnviarFormulario = (e) => {
         e.preventDefault();
-        console.log("Datos del cliente:", datosCliente);
         
+        // Validar celular
+        if (!validatePhone(datosCliente.celular)) {
+            setErrors({
+                celular: "Por favor ingrese un número de celular válido (8-15 dígitos)"
+            });
+            return;
+        }
+
+        console.log("Datos del cliente:", datosCliente);
         setMostrarFormulario(false);
         setMostrarMensaje(true);
         vaciarCarrito();
         
-        setTimeout(() => {
-            setMostrarMensaje(false);
-        }, 6000);
+        setTimeout(() => setMostrarMensaje(false), 8000);
     };
 
-    // Función para aumentar/disminuir cantidad
     const aumentarCantidad = (producto) => {
         agregarAlCarrito({ ...producto, cantidad: 1 });
     };
 
     const disminuirCantidad = (producto) => {
-        if (producto.cantidad > 1) {
-            agregarAlCarrito({ ...producto, cantidad: -1 });
-        } else {
-            removerDelCarrito(producto.id);
-        }
+        producto.cantidad > 1 
+            ? agregarAlCarrito({ ...producto, cantidad: -1 }) 
+            : removerDelCarrito(producto.id);
     };
 
     return (
         <div className="cart-container">
-            {/* Modal de formulario */}
+            {/* Modales */}
             {mostrarFormulario && (
-                <div className="formulario-modal">
-                    <div className="contenido-formulario">
+                <div className="modal-overlay">
+                    <div className="modal-content">
                         <h3>Datos de contacto</h3>
                         <form onSubmit={handleEnviarFormulario}>
-                            <div className="form-group">
-                                <label htmlFor="nombre">Nombre</label>
-                                <input
-                                    type="text"
-                                    id="nombre"
-                                    name="nombre"
-                                    value={datosCliente.nombre}
-                                    onChange={handleInputChange}
-                                    required
-                                />
-                            </div>
-                            
-                            <div className="form-group">
-                                <label htmlFor="apellido">Apellido</label>
-                                <input
-                                    type="text"
-                                    id="apellido"
-                                    name="apellido"
-                                    value={datosCliente.apellido}
-                                    onChange={handleInputChange}
-                                    required
-                                />
-                            </div>
-                            
-                            <div className="form-group">
-                                <label htmlFor="celular">Número de celular</label>
-                                <input
-                                    type="tel"
-                                    id="celular"
-                                    name="celular"
-                                    value={datosCliente.celular}
-                                    onChange={handleInputChange}
-                                    required
-                                />
-                            </div>
-                            
-                            <div className="botones-formulario">
-                                <button 
-                                    type="button" 
-                                    onClick={() => setMostrarFormulario(false)}
-                                    className="boton-cancelar"
-                                >
+                            {["nombre", "apellido", "celular"].map((field) => (
+                                <div key={field} className="form-group">
+                                    <label htmlFor={field}>
+                                        {field === "celular" ? "Número de celular" : field.charAt(0).toUpperCase() + field.slice(1)}
+                                    </label>
+                                    <input
+                                        type={field === "celular" ? "tel" : "text"}
+                                        id={field}
+                                        name={field}
+                                        value={datosCliente[field]}
+                                        onChange={handleInputChange}
+                                        required
+                                        {...(field === "celular" && { 
+                                            pattern: "[0-9]{8,15}",
+                                            title: "Ingrese entre 8 y 15 dígitos"
+                                        })}
+                                    />
+                                    {field === "celular" && errors.celular && (
+                                        <span className="error-message">{errors.celular}</span>
+                                    )}
+                                </div>
+                            ))}
+                            <div className="form-buttons">
+                                <button type="button" onClick={() => setMostrarFormulario(false)}>
                                     Cancelar
                                 </button>
-                                <button 
-                                    type="submit" 
-                                    className="boton-confirmar"
-                                >
-                                    Confirmar compra
-                                </button>
+                                <button type="submit">Confirmar pedido</button>
                             </div>
                         </form>
                     </div>
                 </div>
             )}
 
-            {/* Mensaje de compra exitosa */}
             {mostrarMensaje && (
-                <div className="mensaje-exito">
-                    <div className="contenido-mensaje">
-                        <svg viewBox="0 0 24 24" className="icono-exito">
+                <div className="modal-overlay">
+                    <div className="success-message">
+                        <svg viewBox="0 0 24 24" className="success-icon">
                             <path fill="currentColor" d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" />
                         </svg>
-                        <h3>¡Compra realizada con éxito!</h3>
-                        <p>Gracias {datosCliente.nombre}, hemos recibido tu pedido.</p>
+                        <h3>¡Pedido realizado con éxito!</h3>
+                        <p>Gracias {datosCliente.nombre} {datosCliente.apellido}, hemos recibido tu pedido.</p>
                         <p>Nos contactaremos contigo para coordinar la entrega.</p>
                     </div>
                 </div>
             )}
 
-            {/* Contenido principal del carrito */}
-            <h2>Tu Carrito contiene ({cantidadProductos()} producto/s)</h2>
+            {/* Contenido principal */}
+            <h2>Tu Carrito contine: ({cantidadProductos()} {cantidadProductos() === 1 ? 'producto' : 'productos'})</h2>
 
             {cartItems.length === 0 && !mostrarMensaje ? (
-                <div className="cart-vacio">
+                <div className="empty-cart">
                     <p>No hay productos en tu carrito</p>
-                    <Link to="/productos" className="boton-seguir-comprando">
+                    <Link to="/productos" className="continue-shopping">
                         Seguir comprando
                     </Link>
                 </div>
-            ) : cartItems.length > 0 ? (
+            ) : (
                 <>
-                    <div className="cart-items">
+                    <div className="cart-items-container">
                         {cartItems.map((item) => (
                             <div key={item.id} className="cart-item">
-                                <div className="cart-item-info">
+                                <div className="item-details">
                                     <h3>{item.nombre}</h3>
-                                    <p>Precio unitario: ${item.precio}</p>
-                                    
-                                    <div className="controles-cantidad">
-                                        <button onClick={() => disminuirCantidad(item)}
-                                            className="boton-cantidad">
-                                            -
-                                        </button>
-                                        <span className="cantidad-display">{item.cantidad}</span>
-                                        <button onClick={() => aumentarCantidad(item)}
-                                            className="boton-cantidad">
-                                            +
-                                        </button>
+                                    <p>Precio unitario: ${item.precio.toFixed(2)}</p>
+                                    <div className="quantity-controls">
+                                        <button onClick={() => disminuirCantidad(item)}>-</button>
+                                        <span>{item.cantidad}</span>
+                                        <button onClick={() => aumentarCantidad(item)}>+</button>
                                     </div>
-                                    
-                                    <p>Subtotal: ${item.precio * item.cantidad}</p>
+                                    <p>Subtotal: ${(item.precio * item.cantidad).toFixed(2)}</p>
                                     <button 
-                                        onClick={() => removerDelCarrito(item.id)} 
-                                        className="boton-eliminar"
+                                        onClick={() => removerDelCarrito(item.id)}
+                                        className="remove-btn"
                                     >
                                         Eliminar
                                     </button>
@@ -184,18 +174,18 @@ const Cart = () => {
                     </div>
 
                     <div className="cart-summary">
-                        <h3>Total: ${calcularTotal()}</h3>
-                        <div className="botones-accion">
-                            <button onClick={vaciarCarrito} className="boton-vaciar">
+                        <h3>Total: ${calcularTotal().toFixed(2)}</h3>
+                        <div className="action-buttons">
+                            <button onClick={vaciarCarrito} className="clear-btn">
                                 Vaciar Carrito
                             </button>
-                            <button onClick={handleFinalizarCompra} className="boton-finalizar">
-                                Finalizar Compra
+                            <button onClick={handleFinalizarCompra} className="checkout-btn">
+                                Finalizar Pedido
                             </button>
                         </div>
-                    </div>  
+                    </div>
                 </>
-            ) : null}
+            )}
         </div>
     );
 };

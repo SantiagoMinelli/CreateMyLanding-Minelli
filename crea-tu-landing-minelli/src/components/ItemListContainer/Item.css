@@ -20,18 +20,20 @@
 }
 
 .producto-card h3 {
-    font-size: 1.2rem;
-    margin: 1rem 1rem 0.5rem;
+    font-size: 1.3rem;
+    margin: 0.5rem 0.5rem 0.5rem;
     color: #5d3a00;
     min-height: 3rem;
+    text-align: center;
 }
 
 .precio {
     font-size: 1.3rem;
     font-weight: bold;
     color: #d35400;
-    margin: 0 1rem 1.5rem;
+    margin: 0 1rem 1rem;
     display: block;
+    text-align: center;
 }
 
 .categoria {
@@ -45,13 +47,10 @@
     font-weight: 500;
 }
 
-/* Añade estos estilos para mejorar la visualización en la cuadrícula */
 .producto-card {
-  /* Mantén tus estilos existentes */
     transition: all 0.3s ease;
 }
 
-/* Efecto especial para productos destacados */
 .producto-card.destacado {
     position: relative;
     border: 2px solid #d35400;

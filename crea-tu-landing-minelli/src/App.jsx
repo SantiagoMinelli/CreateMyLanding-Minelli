@@ -7,6 +7,7 @@ import ItemListContainer from './components/ItemListContainer/ItemListContainer'
 import ItemList from './components/ItemListContainer/ItemList';
 import ItemDetailContainer from './components/ItemListContainer/ItemDetailContainer';
 import './App.css';
+import Footer from './components/Pages/Footer';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="*" element={<Error />} />
       </Routes>
+      <Footer/>
     </BrowserRouter>
   );
 }
