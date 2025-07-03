@@ -1,31 +1,107 @@
-* {
-    padding: 0;
+/* Estilos generales del home */
+.home-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.hero-section {
+    text-align: center;
+    padding: 3rem 0;
+    margin-bottom: 3rem;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(93, 58, 0, 0.1);
+    border: 1px solid #ffd7a3;
+}
+
+.hero-section h1 {
+    color: #5d3a00;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero-section p {
+    color: #7d5c2e;
+    font-size: 1.2rem;
     margin: 0;
 }
 
-.home-content {
-    padding: 40px;
-    background-color: #fafafa;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
+/* Sección de destacados */
+.destacados-section {
+    margin-top: 3rem;
 }
 
-h1 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 12px;
-    font-family: "Montserrat", "Raleway";
-    font-size: 70px;
+.destacados-section h2 {
+    text-align: center;
+    color: #5d3a00;
+    font-size: 2rem;
+    margin-bottom: 2.5rem;
+    position: relative;
 }
 
-p {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 12px;
-    font-family: "Montserrat", "Raleway";
-    font-size: 30px;
+.destacados-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background-color: #d35400;
 }
 
+/* Cuadrícula de productos destacados */
+.destacados-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+}
+
+/* Mensaje de carga */
+.cargando {
+    text-align: center;
+    color: #7d5c2e;
+    font-size: 1.2rem;
+    padding: 2rem 0;
+}
+
+/* Añade en Home.css */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.destacados-grid .producto-card {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.destacados-grid .producto-card:nth-child(1) { animation-delay: 0.1s; }
+.destacados-grid .producto-card:nth-child(2) { animation-delay: 0.2s; }
+.destacados-grid .producto-card:nth-child(3) { animation-delay: 0.3s; }
+.destacados-grid .producto-card:nth-child(4) { animation-delay: 0.4s; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-section {
+    padding: 2rem 1rem;
+    }
+
+    .hero-section h1 {
+    font-size: 2rem;
+    }
+
+    .destacados-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .destacados-grid {
+    grid-template-columns: 1fr;
+    max-width: 300px;
+    margin: 0 auto;
+    }
+}

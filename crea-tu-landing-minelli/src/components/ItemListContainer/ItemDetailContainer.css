@@ -1,130 +1,155 @@
-.container-detail {
-    display: flex;
-    justify-content: center;
-    padding: 2rem;
-    font-family: "Montserrat", sans-serif;
-}
-
-.card-detail {
-    display: flex;
-    background-color: white;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+.detalle-container {
     max-width: 1000px;
-    width: 100%;
-    gap: 2rem;
+    margin: 2rem auto;
+    padding: 1rem;
+}
+
+.producto-detalle {
+    display: flex;
+    background: #fff9f0;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(93, 58, 0, 0.1);
+    overflow: hidden;
+    border: 1px solid #ffd7a3;
+}
+
+.imagen-container {
+    flex: 1;
     padding: 2rem;
-    flex-wrap: wrap;
-}
-
-.detail-image {
-    flex: 1 1 300px;
+    background: #fff3e0;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.imagen-card-detail {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
+.imagen-detalle {
+    max-width: 100%;
+    max-height: 450px;
     object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
 }
 
-.detail-info {
-    flex: 1 1 400px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.info-container {
+    flex: 1;
+    padding: 2.5rem;
 }
 
-.title-prod {
-    font-size: 28px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.price-prod {
-    font-size: 24px;
-    color: #34a853;
+.info-container h2 {
+    color: #5d3a00;
+    font-size: 2rem;
+    margin-bottom: 1rem;
     font-weight: 600;
-    margin-bottom: 10px;
 }
 
-.tags {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
+.precio-detalle {
+    font-size: 2rem;
+    color: #d35400;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
 }
 
-.tag {
-    background-color: #e0e0e0;
-    padding: 6px 12px;
+.categoria-detalle {
+    display: inline-block;
+    background: #ffd7a3;
+    color: #5d3a00;
+    padding: 0.4rem 1.2rem;
     border-radius: 20px;
-    font-size: 14px;
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+    font-weight: 500;
 }
 
-.divider {
-    border: none;
-    border-top: 1px solid #ccc;
-    margin: 1rem 0;
+.descripcion {
+    color: #5d3a00;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    font-size: 1.05rem;
 }
 
-.description-prod {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 1rem 0;
-    color: #333;
-    font-size: 16px;
+.ingredientes h4 {
+    color: #5d3a00;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
 }
 
-.description-prod li {
-    margin-bottom: 6px;
+.ingredientes li {
+    padding: 0.4rem 0;
+    color: #7d5c2e;
+    list-style-type: disc;
+    list-style-position: inside;
 }
 
-.item-count {
+.stock {
+    color: #27ae60;
+    font-weight: bold;
+    margin: 1.5rem 0;
+    font-size: 1.1rem;
+}
+
+.controles-cantidad {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    margin: 1rem 0;
+    margin: 2rem 0;
 }
 
-.btn-menos,
-.btn-mas {
-    background-color: #28c9c2;
-    color: white;
+.controles-cantidad button {
+    background: #ffd7a3;
     border: none;
-    border-radius: 8px;
-    padding: 0.5rem 1rem;
-    font-size: 18px;
+    width: 35px;
+    height: 35px;
+    font-size: 1.3rem;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: #5d3a00;
     transition: background 0.3s;
 }
 
-.btn-menos:hover,
-.btn-mas:hover {
-    background-color: #14817b;
+.controles-cantidad button:hover {
+    background: #ffc780;
 }
 
-.cantidad {
-    font-size: 20px;
-    font-weight: bold;
+.controles-cantidad span {
+    margin: 0 1.5rem;
+    font-size: 1.3rem;
+    min-width: 30px;
+    text-align: center;
+    color: #5d3a00;
+    font-weight: 500;
 }
 
-.btn-añadir {
-    background-color: #5c8d65;
+.boton-carrito {
+    background: #d35400;
     color: white;
-    padding: 1rem;
     border: none;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: bold;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 8px;
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: background 0.3s ease;
+    transition: background 0.3s;
+    margin-bottom: 1.5rem;
+    width: 100%;
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
-.btn-añadir:hover {
-    background-color: #426947;
+.boton-carrito:hover {
+    background: #a04000;
+}
+
+.volver {
+    color: #d35400;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.volver:hover {
+    color: #5d3a00;
+    text-decoration: underline;
 }

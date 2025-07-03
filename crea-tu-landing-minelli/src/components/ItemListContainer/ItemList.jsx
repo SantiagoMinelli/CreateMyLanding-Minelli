@@ -1,59 +1,60 @@
-import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { db } from "../../firebase";
 import Item from "./Item";
-import productosBuenasCosas from "../../data/productos";
-import "./ItemListContainer.css";
+//import "./ItemList.css";
 
 function ItemList() {
-    const { categoriaId } = useParams();
-    const [items, setItems] = useState([]);
-    const [loading, setLoading] = useState(true);
+  const { categoriaId } = useParams();
+  const [productos, setProductos] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        console.log("Categoría desde URL:", categoriaId);
-        const fetchProductos = new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(productosBuenasCosas);
-            }, 500);
-        });
+  useEffect(() => {
+    const fetchProductos = async () => {
+      try {
+        const productosRef = collection(db, "productos");
+        const q = query(productosRef, where("categoria", "==", categoriaId));
+        const snapshot = await getDocs(q);
+        const productosData = snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setProductos(productosData);
+      } catch (error) {
+        console.error(`Error cargando productos de ${categoriaId}:`, error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-        fetchProductos.then((data) => {
-console.log("Productos cargados:", data);
+    fetchProductos();
+  }, [categoriaId]);
 
-    if (categoriaId) {
-        const filtrados = data.filter(
-            (prod) =>
-            prod.categoria.toLowerCase() === categoriaId.toLowerCase()
-            );
-            console.log("Productos filtrados:", filtrados);
-            setItems(filtrados);
-        } else {    
-            setItems(data);
-                }
-            setLoading(false);
-        });
-    }, [categoriaId]);
+  if (loading) return <div className="loading">Cargando productos...</div>;
 
-    if (loading) return <p style={{ textAlign: "center", marginTop: "2rem" }}>Cargando productos...</p>;
-
-    return (
-        <div className="container">
-            <h2 style={{ textAlign: "center", paddingTop: "10px" }}>
-                {categoriaId
-                    ? `Productos de ${categoriaId}`
-                    : "Todos los productos"}
-            </h2>
-            <div className="row">
-                {items.length > 0 ? (
-                    items.map((prod) => <Item key={prod.id} {...prod} />)
-                ) : (
-                    <p style={{ textAlign: "center", marginTop: "2rem" }}>
-                        No se encontraron productos en esta categoría.
-                    </p>
-                )}
-            </div>
-        </div>
-    );
+  return (
+    <div className="productos-container">
+      <h2>Productos de {categoriaId}</h2>
+      <div className="productos-grid">
+        {productos.length > 0 ? (
+          productos.map((producto) => (
+            <Item
+              key={producto.id}
+              id={producto.id}
+              nombre={producto.nombre}
+              precio={producto.precio}
+              imagen={producto.imagen}
+              categoria={producto.categoria}
+              showCategory={false}
+            />
+          ))
+        ) : (
+          <p>No hay productos en esta categoría</p>
+        )}
+      </div>
+    </div>
+  );
 }
 
-export default ItemList
+export default ItemList;

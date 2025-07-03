@@ -1,0 +1,409 @@
+/* Estilos para el contenedor principal del carrito */
+.cart-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fff9f0;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(93, 58, 0, 0.1);
+    border: 1px solid #ffd7a3;
+}
+
+.cart-container h2 {
+    color: #5d3a00;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    border-bottom: 2px solid #ffd7a3;
+    padding-bottom: 1rem;
+}
+
+/* Estilos para cuando el carrito está vacío */
+.cart-vacio {
+    text-align: center;
+    padding: 2rem;
+}
+
+.cart-vacio p {
+    color: #7d5c2e;
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.boton-seguir-comprando {
+    display: inline-block;
+    padding: 0.8rem 1.8rem;
+    background-color: #d35400;
+    color: white;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.boton-seguir-comprando:hover {
+    background-color: #a04000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(93, 58, 0, 0.2);
+}
+
+/* Estilos para la lista de productos en el carrito */
+.cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(93, 58, 0, 0.05);
+    border: 1px solid #ffd7a3;
+    transition: transform 0.3s ease;
+}
+
+.cart-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(93, 58, 0, 0.1);
+}
+
+.cart-item-img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 2rem;
+    border: 1px solid #ffd7a3;
+}
+
+.cart-item-info {
+    flex: 1;
+}
+
+.cart-item-info h3 {
+    color: #5d3a00;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+}
+
+.cart-item-info p {
+    color: #7d5c2e;
+    margin: 0.4rem 0;
+    font-size: 1rem;
+}
+
+/* Estilos para los botones */
+.boton-eliminar {
+    padding: 0.6rem 1.2rem;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    margin-top: 0.8rem;
+}
+
+.boton-eliminar:hover {
+    background-color: #c0392b;
+}
+
+/* Controles de cantidad */
+.controles-cantidad {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0.8rem 0;
+}
+
+.boton-cantidad {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid #d35400;
+    background-color: transparent;
+    color: #d35400;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.boton-cantidad:hover {
+    background-color: #d35400;
+    color: white;
+}
+
+.cantidad-display {
+    min-width: 30px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Resumen del carrito */
+.cart-summary {
+    background-color: #fff3e0;
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-top: 2rem;
+    text-align: right;
+    border: 1px solid #ffd7a3;
+}
+
+.cart-summary h3 {
+    color: #5d3a00;
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+}
+
+/* Contenedor de botones */
+.botones-accion {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.boton-finalizar {
+    padding: 0.8rem 1.8rem;
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.boton-finalizar:hover {
+    background-color: #219653;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(39, 174, 96, 0.3);
+}
+
+.boton-vaciar {
+    padding: 0.8rem 1.8rem;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.boton-vaciar:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(231, 76, 60, 0.3);
+}
+
+/* Estilos para el formulario modal */
+.formulario-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.contenido-formulario {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.contenido-formulario h3 {
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border 0.3s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #d35400;
+}
+
+.botones-formulario {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    gap: 1rem;
+}
+
+.boton-cancelar {
+    padding: 0.8rem 1.5rem;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    flex: 1;
+    transition: background 0.3s;
+}
+
+.boton-cancelar:hover {
+    background-color: #c0392b;
+}
+
+.boton-confirmar {
+    padding: 0.8rem 1.5rem;
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    flex: 1;
+    transition: background 0.3s;
+}
+
+.boton-confirmar:hover {
+    background-color: #219653;
+}
+
+/* Mejora el mensaje de éxito */
+.contenido-mensaje p {
+    margin: 0.5rem 0;
+    color: #7f8c8d;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Mensaje de éxito */
+.mensaje-exito {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.contenido-mensaje {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 400px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.icono-exito {
+    width: 60px;
+    height: 60px;
+    color: #27ae60;
+    margin-bottom: 1rem;
+}
+
+.contenido-mensaje h3 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.contenido-mensaje p {
+    color: #7f8c8d;
+    margin-bottom: 0;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Asegúrate que el carrito vacío se muestre correctamente */
+.cart-vacio {
+    text-align: center;
+    padding: 2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .cart-container {
+    padding: 1.5rem;
+    }
+
+    .cart-item {
+    flex-direction: column;
+    text-align: center;
+    padding: 1rem;
+    }
+
+    .cart-item-img {
+    width: 100%;
+    height: auto;
+    margin-right: 0;
+    margin-bottom: 1rem;
+    }
+
+    .cart-summary {
+    text-align: center;
+    }
+
+    .boton-finalizar,
+    .boton-vaciar {
+    width: 100%;
+    margin: 0.5rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .cart-container {
+    padding: 1rem;
+    }
+
+    .cart-container h2 {
+    font-size: 1.5rem;
+    }
+}

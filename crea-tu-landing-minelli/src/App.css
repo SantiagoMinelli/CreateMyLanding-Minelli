@@ -1,14 +1,24 @@
-* {
-    padding: 0;
+/* Estilos base de la aplicación */
+body {
+    background-color: #ffe5c1;
     margin: 0;
-    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #3a2c0a;
+    line-height: 1.6;
 }
 
-body{
-    background-color: #F9F9F9;
+a {
+    color: #d35400;
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
-img{
-    width: 200px;
-    height: 200px;
+a:hover {
+    color: #a04000;
+}
+
+/* Contenedor principal */
+.main-container {
+    min-height: calc(100vh - 120px);
+    padding: 2rem 0;
 }

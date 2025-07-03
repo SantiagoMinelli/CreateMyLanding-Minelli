@@ -1,78 +1,55 @@
-import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import productosBuenasCosas from "../../data/productos";
+import { useParams } from "react-router-dom";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../firebase";
+import Item from "./Item";
 import "./ItemDetailContainer.css";
 
 function ItemDetailContainer() {
-    const { itemId } = useParams();
-    const [items, setItems] = useState([]);
-    const [producto, setProducto] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [cantidad, setCantidad] = useState(1);
+  const { id } = useParams();
+  const [producto, setProducto] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-    const fetchProductos = new Promise((resolve) => {
-        setTimeout(() => {
-            resolve(productosBuenasCosas);
-        },200);
-    });
-
-    fetchProductos.then((data) => {
-        setItems(data);
-        });
-    }, []);
-
-    useEffect(() => {
-    if (items.length > 0) {
-        const encontrado = items.find((prod) => prod.id === parseInt(itemId));
-        setProducto(encontrado || null);
-        setLoading(false);
+  useEffect(() => {
+    const fetchProducto = async () => {
+      try {
+        const docRef = doc(db, "productos", id);
+        const docSnap = await getDoc(docRef);
+        
+        if (docSnap.exists()) {
+          setProducto({
+            id: docSnap.id,
+            nombre: docSnap.data().nombre,
+            descripcion: docSnap.data().descripcion,
+            precio: docSnap.data().precio,
+            imagen: docSnap.data().imagen,
+            categoria: docSnap.data().categoria,
+            ingredientes: docSnap.data().ingredientes || [],
+            stock: docSnap.data().stock || 0
+          });
         }
-    }, [items, itemId]);
-
-    const incrementar = () => setCantidad((prev) => prev + 1);
-    const decrementar = () => {
-        if (cantidad > 1) setCantidad((prev) => prev - 1);
+      } catch (error) {
+        console.error("Error cargando producto:", error);
+      } finally {
+        setLoading(false);
+      }
     };
 
-    if (loading) return <p style={{ textAlign: "center", marginTop: "2rem" }}>Cargando producto...</p>;
-    if (!producto) return <p style={{ textAlign: "center", marginTop: "2rem" }}>Producto no encontrado.</p>;
+    fetchProducto();
+  }, [id]);
 
+  if (loading) return <div className="loading">Cargando producto...</div>;
+  if (!producto) return <div>Producto no encontrado</div>;
 
-    return (
-<div className="container-detail">
-        <div className="card-detail">
-            <div className="detail-image">
-                <img src={producto.imagen} alt={producto.nombre} className="imagen-card-detail" />
-            </div>
-
-            <div className="detail-info">
-                <h2 className="title-prod">{producto.nombre}</h2>
-                <p className="price-prod">$ {producto.precio}</p>
-
-                <div className="tags">
-                    <span className="tag">{producto.categoria}</span>
-                </div>
-
-                <hr className="divider" />
-
-                <ul className="description-prod">
-                    <li>{producto.descripcion}</li>
-                </ul>
-
-                <div className="item-count">
-                    <button className="btn-menos" onClick={decrementar}>−</button>
-                    <span className="cantidad">{cantidad}</span>
-                    <button className="btn-mas" onClick={incrementar}>+</button>
-                </div>
-
-                <button className="btn-añadir">
-                    Agregar al Carrito
-                </button>
-            </div>
-        </div>
+  return (
+    <div className="detalle-container">
+      <Item 
+        {...producto}
+        isDetail={true}
+        showFullDescription={true}
+      />
     </div>
-    );
+  );
 }
 
 export default ItemDetailContainer;
